@@ -7,6 +7,8 @@ void ClearScene::Update() {
 		sceneNo = TITLE;
 	}
 	Novice::ScreenPrintf(640, 360, "Game Clear");
+
+	Novice::ScreenPrintf(640, 500, "Push SPACE");
 }
 
 void ClearScene::Draw() { Novice::DrawBox(0, 0, 1280, 720, 0.0f, BLUE, kFillModeSolid); }
