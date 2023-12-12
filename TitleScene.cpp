@@ -1,13 +1,15 @@
 #include "TitleScene.h"
-
-void TitleScene::Initialize() { input_->GetInstance(); }
+#include"Novice.h"
+void TitleScene::Initialize() { }
 
 void TitleScene::Update() {
-	if (input_->TriggerKey(DIK_SPACE)) {
+	if (keys_[ DIK_SPACE ]&&!preKeys_[DIK_SPACE]) {
 		sceneNo = STAGE;
 	}
 
+	Novice::ScreenPrintf(640, 360, "Title");
+
 }
 
-void TitleScene::Draw() {}
+void TitleScene::Draw() { Novice::DrawBox(0, 0, 1280, 720, 0.0f, RED, kFillModeSolid); }
 

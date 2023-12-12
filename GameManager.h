@@ -1,10 +1,10 @@
 #pragma once
 #include<memory>
-#include"Scene.h"
+#include"IScene.h"
 #include"ClearScene.h"
 #include"StageScene.h"
 #include"TitleScene.h"
-#include"Input.h"
+
 
 
 class GameManager {
@@ -15,8 +15,9 @@ private:
 	//どのステージを呼び出すかを管理する変数
 	int currentSceneNo_; //現在のシーン
 	int preSceneNo_; //前のシーン
-
-	Input* input_ = nullptr;
+	//キー入力結果を受け取る箱
+	char keys_[256] = { 0 };
+	char preKeys_[256] = { 0 };
 
 public:
 	GameManager(); //コンストラクタ

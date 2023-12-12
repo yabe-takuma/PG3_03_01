@@ -1,21 +1,33 @@
 #include "GameManager.h"
-
+#include"Novice.h"
 GameManager::GameManager() {
 	//各シーンの配列
 	sceneArr_[TITLE] = std::make_unique<TitleScene>();
 	sceneArr_[STAGE] = std::make_unique<StageScene>();
 	sceneArr_[CLEAR] = std::make_unique<ClearScene>();
 
+	for (int i = 0; i < SceneMax; i++) {
+		//ゲームマネージャーをキーをすべてのシーンに反映させる
+		sceneArr_[i]->Setkeys(keys_, preKeys_);
+
+	}
+
 	//初期シーンの設定
 	currentSceneNo_ = TITLE;
 
-	input_->GetInstance();
+	
 }
 
 GameManager::~GameManager() {}
 
 int GameManager::Run() {
-	while (true) {
+     while(Novice::ProcessMessage()==0){
+		Novice::BeginFrame();   //フレーム開始
+
+		//キー入力を受け取る,mainから移動
+		memcpy(preKeys_, keys_, 256);
+		Novice::GetHitKeyStateAll(keys_);
+
 		//シーンのチェック
 		preSceneNo_ = currentSceneNo_;
 		currentSceneNo_ = sceneArr_[currentSceneNo_]->GetSceneNo();
@@ -32,10 +44,10 @@ int GameManager::Run() {
 		//描画処理
 		sceneArr_[currentSceneNo_]->Draw();
 
-		false;
+		Novice::EndFrame();  //フレームの終了
 
 		//ESCキーが押された瞬間ループを抜ける
-		if (input_->TriggerKey(DIK_ESCAPE) && input_->PushKey(DIK_ESCAPE)) {
+		if (keys_[DIK_ESCAPE] && preKeys_[DIK_ESCAPE]) {
 			break;
 		}
 

@@ -1,6 +1,6 @@
 #pragma once
-#include"Scene.h"
-#include"Input.h"
+#include"IScene.h"
+
 class TitleScene : public IScene {
 public:
 	void Initialize() override;
@@ -10,6 +10,6 @@ public:
 	void Draw() override;
 
 private:
-	Input* input_ = nullptr;
+	
 };
 
