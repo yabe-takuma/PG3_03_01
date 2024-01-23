@@ -11,6 +11,9 @@ void StageScene::Initialize() {
 
 void StageScene::Update() {
 	Novice::ScreenPrintf(640, 500, "Stage");
+	Novice::ScreenPrintf(1100, 600, "D:RightMove");
+	Novice::ScreenPrintf(1100, 620, "A:LeftMove");
+	Novice::ScreenPrintf(1100, 640, "SPACE:BulletFiring");
 	if (enemy_->IsActive()) {
 		sceneNo = CLEAR;
 	}
